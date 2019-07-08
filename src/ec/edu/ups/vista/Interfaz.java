@@ -54,7 +54,7 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
     public Interfaz() {
         initComponents();
         try {
-            arduino.arduinoTX("COM13", 9600);
+            //arduino.arduinoTX("COM13", 9600);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -65,7 +65,7 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
 
     public void conectar() {
         try {
-
+            arduino.arduinoTX("COM13", 9600);
             estado.setText("Conexion Exitosa!!");
         } catch (Exception err) {
             err.printStackTrace();
@@ -99,11 +99,11 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
         btn6Am = new javax.swing.JButton();
         btn7Az = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
+        btnELin = new javax.swing.JButton();
+        btnEAuto = new javax.swing.JButton();
+        btnENuevo = new javax.swing.JButton();
+        btnDetEfec = new javax.swing.JButton();
+        btnApagar = new javax.swing.JButton();
         btnConectar = new javax.swing.JButton();
         btnDesc = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -172,43 +172,43 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
         jLabel1.setFont(new java.awt.Font("Rockwell", 3, 36)); // NOI18N
         jLabel1.setText("Conexion Arduino");
 
-        jButton8.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jButton8.setText("EFECTO LÍNEA");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btnELin.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btnELin.setText("EFECTO LÍNEA");
+        btnELin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btnELinActionPerformed(evt);
             }
         });
 
-        jButton9.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jButton9.setText("EFECTO AUTO FANTASTICO");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btnEAuto.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btnEAuto.setText("EFECTO AUTO FANTASTICO");
+        btnEAuto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btnEAutoActionPerformed(evt);
             }
         });
 
-        jButton10.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jButton10.setText("EFECTO NUEVO");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        btnENuevo.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btnENuevo.setText("EFECTO NUEVO");
+        btnENuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                btnENuevoActionPerformed(evt);
             }
         });
 
-        jButton11.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jButton11.setText("DETENER EFECTOS");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        btnDetEfec.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btnDetEfec.setText("DETENER EFECTOS");
+        btnDetEfec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                btnDetEfecActionPerformed(evt);
             }
         });
 
-        jButton12.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jButton12.setText("APAGAR LEDS");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        btnApagar.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btnApagar.setText("APAGAR LEDS");
+        btnApagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                btnApagarActionPerformed(evt);
             }
         });
 
@@ -248,7 +248,7 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
         });
 
         jPos.setFont(new java.awt.Font("Rockwell", 3, 14)); // NOI18N
-        jPos.setText("Posición");
+        jPos.setText("Nivel: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -263,16 +263,16 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButton8)
+                                        .addComponent(btnELin)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton9)
+                                        .addComponent(btnEAuto)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton10)
+                                        .addComponent(btnENuevo)
                                         .addGap(43, 43, 43))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButton11)
+                                        .addComponent(btnDetEfec)
                                         .addGap(82, 82, 82)
-                                        .addComponent(jButton12)
+                                        .addComponent(btnApagar)
                                         .addGap(136, 136, 136))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btn1Az)
@@ -339,13 +339,13 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
                             .addComponent(btn7Az, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton8)
-                            .addComponent(jButton9)
-                            .addComponent(jButton10))
+                            .addComponent(btnELin)
+                            .addComponent(btnEAuto)
+                            .addComponent(btnENuevo))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton11)
-                            .addComponent(jButton12))))
+                            .addComponent(btnDetEfec)
+                            .addComponent(btnApagar))))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -374,7 +374,7 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
         }
     }//GEN-LAST:event_btn1AzActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         try {
             arduino.sendData("a");
 
@@ -389,7 +389,7 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_btnApagarActionPerformed
 
     private void btn2AmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2AmActionPerformed
         // TODO add your handling code here:
@@ -461,45 +461,53 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
     private void btnDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDescActionPerformed
         // TODO add your handling code here:
         desconectar();
+
     }//GEN-LAST:event_btnDescActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btnELinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnELinActionPerformed
 
         try {
             arduino.sendData("8");
+            btnELin.setEnabled(false);
+
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btnELinActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void btnDetEfecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetEfecActionPerformed
         try {
             arduino.sendData("b");
+            btnELin.setEnabled(true);
+            btnEAuto.setEnabled(true);
+            btnENuevo.setEnabled(true);
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_btnDetEfecActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void btnEAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEAutoActionPerformed
 
         try {
             arduino.sendData("9");
+            btnEAuto.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_btnEAutoActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void btnENuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnENuevoActionPerformed
 
         try {
             arduino.sendData("0");
+            btnENuevo.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_btnENuevoActionPerformed
 
     private void jSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderStateChanged
 
@@ -556,14 +564,14 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
     private javax.swing.JButton btn5Ro;
     private javax.swing.JButton btn6Am;
     private javax.swing.JButton btn7Az;
+    private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnConectar;
     private javax.swing.JButton btnDesc;
+    private javax.swing.JButton btnDetEfec;
+    private javax.swing.JButton btnEAuto;
+    private javax.swing.JButton btnELin;
+    private javax.swing.JButton btnENuevo;
     private javax.swing.JLabel estado;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jPos;
