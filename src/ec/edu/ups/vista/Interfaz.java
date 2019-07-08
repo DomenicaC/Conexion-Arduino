@@ -21,7 +21,30 @@ import panamahitek.Arduino.PanamaHitek_Arduino;
  */
 public class Interfaz extends javax.swing.JFrame implements SerialPortEventListener {
 
+    int r = 0;
     PanamaHitek_Arduino arduino = new PanamaHitek_Arduino();
+    int OutputR;
+
+    public void Led() {
+
+        r = jSlider.getValue();
+
+    }
+
+    public void SetData() {
+
+        //OutputR = "c";
+        if (r >= 0 || r <= 400) {
+            OutputR = 100;
+        } else if (r >= 401 || r <= 600) {
+            OutputR = 300;
+        } else if (r >= 601 || r <= 800) {
+            OutputR = 700;
+        } else if (r >= 801) {
+            OutputR = 1000;
+        }
+
+    }
 
     private NRSerialPort puertoUSB;
 
@@ -29,13 +52,15 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
      * Creates new form Interfaz
      */
     public Interfaz() {
+        initComponents();
         try {
-            initComponents();
             arduino.arduinoTX("COM13", 9600);
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+        //jSlider.setEnabled(false);
     }
 
     public void conectar() {
@@ -48,8 +73,12 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
     }
 
     public void desconectar() {
+        try {
 
-        estado.setText("Desconectado");
+            estado.setText("Desconectado");
+        } catch (Exception err) {
+            err.printStackTrace();
+        }
 
     }
 
@@ -63,12 +92,12 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
     private void initComponents() {
 
         btn1Az = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        btn2Am = new javax.swing.JButton();
+        btn3Ro = new javax.swing.JButton();
+        btn4Ver = new javax.swing.JButton();
+        btn5Ro = new javax.swing.JButton();
+        btn6Am = new javax.swing.JButton();
+        btn7Az = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -79,6 +108,8 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
         btnDesc = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         estado = new javax.swing.JLabel();
+        jSlider = new javax.swing.JSlider();
+        jPos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,51 +121,51 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jButton2.setText("2 Amarillo");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn2Am.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btn2Am.setText("2 Amarillo");
+        btn2Am.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn2AmActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jButton3.setText("3 Rojo");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn3Ro.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btn3Ro.setText("3 Rojo");
+        btn3Ro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn3RoActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jButton4.setText("4 Verde");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btn4Ver.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btn4Ver.setText("4 Verde");
+        btn4Ver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btn4VerActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jButton5.setText("5 Rojo");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btn5Ro.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btn5Ro.setText("5 Rojo");
+        btn5Ro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btn5RoActionPerformed(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jButton6.setText("6 Amarillo");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btn6Am.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btn6Am.setText("6 Amarillo");
+        btn6Am.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btn6AmActionPerformed(evt);
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
-        jButton7.setText("7 Azul");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btn7Az.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
+        btn7Az.setText("7 Azul");
+        btn7Az.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btn7AzActionPerformed(evt);
             }
         });
 
@@ -204,6 +235,21 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
         estado.setFont(new java.awt.Font("Rockwell", 2, 18)); // NOI18N
         estado.setText("Desconectado");
 
+        jSlider.setForeground(new java.awt.Color(0, 102, 153));
+        jSlider.setMajorTickSpacing(200);
+        jSlider.setMaximum(1020);
+        jSlider.setOrientation(javax.swing.JSlider.VERTICAL);
+        jSlider.setPaintLabels(true);
+        jSlider.setPaintTicks(true);
+        jSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSliderStateChanged(evt);
+            }
+        });
+
+        jPos.setFont(new java.awt.Font("Rockwell", 3, 14)); // NOI18N
+        jPos.setText("Posición");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,161 +257,201 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnConectar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDesc, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jButton8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton10)
+                                        .addGap(43, 43, 43))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jButton11)
+                                        .addGap(82, 82, 82)
+                                        .addComponent(jButton12)
+                                        .addGap(136, 136, 136))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btn1Az)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn2Am)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn3Ro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn4Ver)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn5Ro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn6Am)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn7Az)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnConectar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDesc, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(131, 131, 131)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton5))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addComponent(estado))
-                                .addComponent(jLabel2)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton7))
+                            .addComponent(jLabel2)
+                            .addComponent(estado))
+                        .addGap(18, 18, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(128, 128, 128)
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton10)
-                        .addGap(62, 62, 62))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton11)
-                        .addGap(82, 82, 82)
-                        .addComponent(jButton12)
-                        .addGap(155, 155, 155))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPos)
+                        .addGap(94, 94, 94)))
+                .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPos))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(btnConectar))
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(estado)
-                .addGap(9, 9, 9)
-                .addComponent(btnDesc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn1Az, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9)
-                    .addComponent(jButton10))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton11)
-                    .addComponent(jButton12))
-                .addGap(30, 30, 30))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnConectar)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(estado)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(btnDesc)))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn1Az, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn2Am, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn3Ro, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn4Ver, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn5Ro, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn6Am, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn7Az, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton8)
+                            .addComponent(jButton9)
+                            .addComponent(jButton10))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton11)
+                            .addComponent(jButton12))))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void poten() {
+
+        //this.txtPos.setVisible(true);
+        try {
+            arduino.sendData("c");
+
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+
     private void btn1AzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1AzActionPerformed
         try {
             arduino.sendData("1");
+            btn1Az.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn1AzActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-          try {
-         arduino.sendData("a");
-         } catch (Exception ex) {
-         Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        try {
+            arduino.sendData("a");
+
+            btn1Az.setEnabled(true);
+            btn2Am.setEnabled(true);
+            btn3Ro.setEnabled(true);
+            btn4Ver.setEnabled(true);
+            btn5Ro.setEnabled(true);
+            btn6Am.setEnabled(true);
+            btn7Az.setEnabled(true);
+
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn2AmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2AmActionPerformed
         // TODO add your handling code here:
         try {
             arduino.sendData("2");
+            btn2Am.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn2AmActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btn3RoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3RoActionPerformed
         // TODO add your handling code here:
         try {
             arduino.sendData("3");
+            btn3Ro.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btn3RoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btn4VerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4VerActionPerformed
         // TODO add your handling code here:
         try {
             arduino.sendData("4");
+            btn4Ver.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btn4VerActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btn5RoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5RoActionPerformed
         // TODO add your handling code here:
         try {
             arduino.sendData("5");
+            btn5Ro.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btn5RoActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btn6AmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6AmActionPerformed
         // TODO add your handling code here
         try {
             arduino.sendData("6");
+            btn6Am.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btn6AmActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btn7AzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7AzActionPerformed
         // TODO add your handling code here:
         try {
             arduino.sendData("7");
+            btn7Az.setEnabled(false);
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+
+    }//GEN-LAST:event_btn7AzActionPerformed
 
     private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
         // TODO add your handling code here:
@@ -388,11 +474,11 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        /* try {
-         arduino.sendData("0");
-         } catch (Exception ex) {
-         Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-         }*/
+        try {
+            arduino.sendData("b");
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -414,6 +500,18 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
         }
 
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderStateChanged
+
+        jPos.setText("Nivel: " + jSlider.getValue());
+        Led();
+        try {
+            arduino.sendData(String.valueOf(r));
+        } catch (Exception ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jSliderStateChanged
 
     /**
      * @param args the command line arguments
@@ -452,22 +550,24 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn1Az;
+    private javax.swing.JButton btn2Am;
+    private javax.swing.JButton btn3Ro;
+    private javax.swing.JButton btn4Ver;
+    private javax.swing.JButton btn5Ro;
+    private javax.swing.JButton btn6Am;
+    private javax.swing.JButton btn7Az;
     private javax.swing.JButton btnConectar;
     private javax.swing.JButton btnDesc;
     private javax.swing.JLabel estado;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jPos;
+    private javax.swing.JSlider jSlider;
     // End of variables declaration//GEN-END:variables
 
     @Override
