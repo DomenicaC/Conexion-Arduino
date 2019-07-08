@@ -21,31 +21,9 @@ import panamahitek.Arduino.PanamaHitek_Arduino;
  */
 public class Interfaz extends javax.swing.JFrame implements SerialPortEventListener {
 
-    int r = 0;
+   
     PanamaHitek_Arduino arduino = new PanamaHitek_Arduino();
-    int OutputR;
-
-    public void Led() {
-
-        r = jSlider.getValue();
-
-    }
-
-    public void SetData() {
-
-        //OutputR = "c";
-        if (r >= 0 || r <= 400) {
-            OutputR = 100;
-        } else if (r >= 401 || r <= 600) {
-            OutputR = 300;
-        } else if (r >= 601 || r <= 800) {
-            OutputR = 700;
-        } else if (r >= 801) {
-            OutputR = 1000;
-        }
-
-    }
-
+  
     private NRSerialPort puertoUSB;
 
     /**
@@ -112,6 +90,11 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
         jPos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btn1Az.setFont(new java.awt.Font("Rockwell", 1, 14)); // NOI18N
         btn1Az.setText("1 Azul");
@@ -352,19 +335,6 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void poten() {
-
-        //this.txtPos.setVisible(true);
-        try {
-            arduino.sendData("c");
-
-        } catch (Exception ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-
     private void btn1AzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1AzActionPerformed
         try {
             arduino.sendData("1");
@@ -462,6 +432,7 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
         // TODO add your handling code here:
         desconectar();
 
+
     }//GEN-LAST:event_btnDescActionPerformed
 
     private void btnELinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnELinActionPerformed
@@ -512,14 +483,31 @@ public class Interfaz extends javax.swing.JFrame implements SerialPortEventListe
     private void jSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderStateChanged
 
         jPos.setText("Nivel: " + jSlider.getValue());
-        Led();
+
         try {
-            arduino.sendData(String.valueOf(r));
+            if (jSlider.getValue() >= 0 && jSlider.getValue() <= 400) {
+                arduino.sendData("d");
+            }
+            if (jSlider.getValue() >= 401 && jSlider.getValue() <= 600) {
+                arduino.sendData("e");
+            }
+            if (jSlider.getValue() >= 601 && jSlider.getValue() <= 800) {
+                arduino.sendData("f");
+            }
+            if (jSlider.getValue() >= 801) {
+                arduino.sendData("g");
+            }
+
         } catch (Exception ex) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jSliderStateChanged
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        desconectar();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
